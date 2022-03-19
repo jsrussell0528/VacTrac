@@ -19,13 +19,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-light ml-5 mt-2" asp-page="/Index">Public</a>
+                            <a class="nav-link text-light ml-5 mt-2" asp-area="" asp-controller="Home" asp-action="Index">Public</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light ml-5 mt-2" asp-page="/Private">Private</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light ml-5 mt-2" asp-page="/AddVax">Add/Edit Vaccines</a>
+                            <a class="nav-link text-light ml-5 mt-2" asp-area="" asp-controller="Home" asp-action="Privacy">Private</a>
                         </li>
                     </ul>
                 </div>
@@ -38,10 +35,14 @@
         </main>
     </div>
 
+    <footer class="border-top footer text-light">
+        <div class="container">
+            &copy; 2022 - VacTrac </a>
+        </div>
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
