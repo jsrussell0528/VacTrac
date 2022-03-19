@@ -23,7 +23,7 @@ namespace VacTrac_0._2.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Private()
         {
             return View();
         }
