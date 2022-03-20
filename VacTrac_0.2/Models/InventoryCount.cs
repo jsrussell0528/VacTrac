@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace VacTrac.Models
 {
-    public class Vaccine
+    public class InventoryCount
     {
         public int ID { get; set; }
-        public string VaccineName { get; set; }
-        public string Description { get; set; }
+        public string VaccineID { get; set; }
+        public bool IsPrivate { get; set; }
+        public int Count { get; set; }
     }
 }

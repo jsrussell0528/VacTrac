@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using VacTrac_0._2.Models;
+using VacTrac.Models;
 
-namespace VacTrac_0._2.Controllers
+namespace VacTrac.Controllers
 {
     public class HomeController : Controller
     {
