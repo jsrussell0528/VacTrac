@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>VacTrac_0._2</RootNamespace>
+    <UserSecretsId>7305eeb3-ebef-4573-b73c-9809af70f165</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

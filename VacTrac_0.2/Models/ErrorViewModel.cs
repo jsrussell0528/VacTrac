@@ -1,6 +1,6 @@
 using System;
 
-namespace VacTrac_0._2.Models
+namespace VacTrac.Models
 {
     public class ErrorViewModel
     {

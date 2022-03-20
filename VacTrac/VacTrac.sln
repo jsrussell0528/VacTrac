@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacTrac_0.2", "..\VacTrac_0.2\VacTrac_0.2.csproj", "{4E821C6C-302F-44A1-875B-4D65AEE537A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacTrac", "..\VacTrac_0.2\VacTrac.csproj", "{4E821C6C-302F-44A1-875B-4D65AEE537A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

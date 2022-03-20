@@ -14,5 +14,6 @@ namespace VacTrac
         }
 
         public DbSet<Vaccine> Vaccines { get; set; }
+        public DbSet<Vaccine> InventoryCount { get; set; }
     }
 }
