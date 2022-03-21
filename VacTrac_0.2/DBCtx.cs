@@ -12,7 +12,6 @@ namespace VacTrac
         public DBCtx(DbContextOptions<DBCtx> options) : base(options)
         {
         }
-
         public DbSet<Vaccine> Vaccines { get; set; }
         public DbSet<Vaccine> InventoryCount { get; set; }
     }

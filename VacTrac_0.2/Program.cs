@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace VacTrac_0._2
+namespace VacTrac
 {
     public class Program
     {
