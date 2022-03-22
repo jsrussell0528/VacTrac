@@ -5,6 +5,8 @@ using System.Configuration;
 using System.Data.Common;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.Data.Sqlite;
+using System.IO;
+using System.Reflection;
 
 namespace VacTrac
 {
