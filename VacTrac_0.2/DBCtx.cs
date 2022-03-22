@@ -1,18 +1,25 @@
 ﻿using System;
 using VacTrac.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Configuration;
+using System.Data.Common;
+using Microsoft.IdentityModel.Protocols;
+using Microsoft.Data.Sqlite;
 
 namespace VacTrac
 {
     public class DBCtx: DbContext
     {
-        public DBCtx(DbContextOptions<DBCtx> options) : base(options)
+        public DbSet<Vaccines> Vaccines { get; set; }
+        public DbSet<Vaccines> InventoryCount { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            var connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = "Database\\VacTracDB.db" };
+            var connectionString = connectionStringBuilder.ToString();
+            var connection = new SqliteConnection(connectionString);
+
+            optionsBuilder.UseSqlite(connection);
         }
-        public DbSet<Vaccine> Vaccines { get; set; }
-        public DbSet<Vaccine> InventoryCount { get; set; }
+
     }
 }

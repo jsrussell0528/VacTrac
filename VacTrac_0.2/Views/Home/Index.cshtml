@@ -1,7 +1,10 @@
-﻿@{
+﻿@model VacTrac.Models.Vaccines
+@{
     ViewData["Title"] = "Public Vaccines";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
+    @Model.VaccineName;
+    @Model.Description;
 </div>

@@ -12,7 +12,7 @@ namespace VacTrac.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        private readonly DBCtx _myDbContext = new DBCtx();
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -20,7 +20,8 @@ namespace VacTrac.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var vaccines = _myDbContext.Vaccines.First();
+            return View(vaccines);
         }
 
         public IActionResult Private()
