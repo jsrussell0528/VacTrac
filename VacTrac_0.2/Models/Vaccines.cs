@@ -12,7 +12,7 @@ namespace VacTrac.Models
         public string? Description { get; set; }
         public string? MonthlyPAR { get; set; }
         public string? WeeklyPAR { get; set; }
-        public bool? Private { get; set; }
+        public string? Private { get; set; }
         public int? InventoryTotal { get; set; }
     }
 }
