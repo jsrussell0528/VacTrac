@@ -24,6 +24,11 @@ namespace VacTrac.Controllers
             return View(vaccines);
         }
 
+        public IActionResult Vaccines()
+        {
+            var vaccines = _myDbContext.Vaccines;
+            return View(vaccines);
+        }
         public IActionResult Private()
         {
             return View();
