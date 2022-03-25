@@ -20,18 +20,18 @@ namespace VacTrac.Controllers
 
         public IActionResult Index()
         {
-            var vaccines = _myDbContext.Vaccines.First();
-            return View(vaccines);
+
+            var AllVaccines = _myDbContext.Vaccines;
+            ViewData["VFC"] = _myDbContext.Vaccines.Where(x => x.Private == "VFC");
+            ViewData["Private"] = _myDbContext.Vaccines.Where(x => x.Private == "Private");
+
+            return View(AllVaccines);
         }
 
         public IActionResult Vaccines()
         {
-            var vaccines = _myDbContext.Vaccines;
-            return View(vaccines);
-        }
-        public IActionResult Private()
-        {
-            return View();
+            var AllVaccines = _myDbContext.Vaccines;
+            return View(AllVaccines);
         }
 
         public IActionResult CreateVaccine()
@@ -64,6 +64,7 @@ namespace VacTrac.Controllers
 
             vac.Description = vaccine.Description;
             vac.InventoryTotal = vaccine.InventoryTotal;
+            vac.InventoryMax = vaccine.InventoryMax;
             vac.Private = vaccine.Private;
             vac.VaccineName = vaccine.VaccineName;
             vac.WeeklyPAR = vaccine.WeeklyPAR;

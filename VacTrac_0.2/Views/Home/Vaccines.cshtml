@@ -57,9 +57,9 @@
                         @Html.DisplayFor(modelItem => item.Private)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.InventoryTotal)
+                        @Html.DisplayFor(modelItem => item.InventoryTotal) / @Html.DisplayFor(modelItem => item.InventoryMax)
                     </td>
-                    <td>
+                    <td class="col-3">
                         <a class="btn btn-success" asp-action="EditVaccine" asp-route-id="@item.ID">Edit</a>
                         <a class="btn btn-secondary" asp-action="VaccineDetails" asp-route-id="@item.ID">Details</a>
                         <a class="btn btn-danger" asp-action="DeleteVaccine" asp-route-id="@item.ID">Delete</a>

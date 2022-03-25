@@ -14,5 +14,6 @@ namespace VacTrac.Models
         public string? WeeklyPAR { get; set; }
         public string? Private { get; set; }
         public int? InventoryTotal { get; set; }
+        public int? InventoryMax { get; set; }
     }
 }

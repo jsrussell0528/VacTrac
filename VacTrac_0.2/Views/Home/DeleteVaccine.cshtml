@@ -43,10 +43,12 @@
                 @Html.DisplayFor(model => model.Private)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.InventoryTotal)
+                Inventory
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.InventoryTotal)
+                @Html.DisplayFor(model => model.InventoryTotal) /@Html.DisplayFor(model => model.InventoryMax)
+            </dd>
+            <dd class="col-sm-10">
             </dd>
         </dl>
 

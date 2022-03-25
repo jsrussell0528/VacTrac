@@ -1,9 +1,159 @@
-﻿@model VacTrac.Models.Vaccines
+﻿@model IEnumerable<VacTrac.Models.Vaccines>
 @{
-    ViewData["Title"] = "Public Vaccines";
+    ViewData["Title"] = "PARs Tracking";
+    IEnumerable<VacTrac.Models.Vaccines> VFC = (IEnumerable<VacTrac.Models.Vaccines>)ViewData["VFC"];
+    IEnumerable<VacTrac.Models.Vaccines> Private = (IEnumerable<VacTrac.Models.Vaccines>)ViewData["Private"];
 }
-
-<div class="text-center">
-    <h1 class="display-4">VFC Vaccines</h1>
-    Future Homepage goes here for VFCs
+<h1 class="display-6 text-center">Vaccines</h1>
+<div>
+    <div class="tab-content">
+        <ul class="nav nav-tabs justify-content-center" id="myTab">
+            <li class="nav-item col-11 row">
+                <div class="active nav-link text-center col-4" data-toggle="tab" href="#VFC">VFC</div>
+                <div class="nav-link text-center col-4" data-toggle="tab" href="#Private">Private</div>
+                <div class="nav-link text-center col-4" data-toggle="tab" href="#All">All</div>
+            </li>
+        </ul>
+        <div class="tab-pane container-fluid active" id="VFC">
+            <div class="row m-3 p-3">
+                <table class="table table-striped table-light table-responsive" id="VFCTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                Vaccine Name
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Monthly PAR
+                            </th>
+                            <th>
+                                Weekly PAR
+                            </th>
+                            <th>
+                                Inventory
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in VFC)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VaccineName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MonthlyPAR)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.WeeklyPAR)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InventoryTotal) / @Html.DisplayFor(modelItem => item.InventoryMax)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane container-fluid fade" id="Private">
+            <div class="row m-3 p-3">
+                <table class="table table-striped table-light table-responsive" id="PrivateTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                Vaccine Name
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Monthly PAR
+                            </th>
+                            <th>
+                                Weekly PAR
+                            </th>
+                            <th>
+                                Inventory
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Private)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VaccineName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MonthlyPAR)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.WeeklyPAR)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InventoryTotal) / @Html.DisplayFor(modelItem => item.InventoryMax)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane container-fluid fade" id="All">
+            <div class="row m-3 p-3">
+                <table class="table table-striped table-light table-responsive" id="AllTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                Vaccine Name
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Monthly PAR
+                            </th>
+                            <th>
+                                Weekly PAR
+                            </th>
+                            <th>
+                                Inventory
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VaccineName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MonthlyPAR)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.WeeklyPAR)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InventoryTotal) / @Html.DisplayFor(modelItem => item.InventoryMax)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
