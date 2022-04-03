@@ -10,10 +10,10 @@ namespace VacTrac.Models
         public int ID { get; set; }
         public string VaccineName { get; set; }
         public string? Description { get; set; }
-        public string? MonthlyPAR { get; set; }
-        public string? WeeklyPAR { get; set; }
+        public int? MonthlyPAR { get; set; }
+        public int? WeeklyPAR { get; set; }
         public string? Private { get; set; }
-        public int? InventoryTotal { get; set; }
-        public int? InventoryMax { get; set; }
+        public int? InventoryAccuvax { get; set; }
+        public int? InventoryFridge { get; set; }
     }
 }

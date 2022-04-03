@@ -29,11 +29,11 @@
                 <input asp-for="MonthlyPAR" class="form-control" />
                 <span asp-validation-for="MonthlyPAR" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="WeeklyPAR" class="control-label"></label>
                 <input asp-for="WeeklyPAR" class="form-control" />
                 <span asp-validation-for="WeeklyPAR" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 @{
                     List<SelectListItem> listItems = new List<SelectListItem>();
@@ -58,15 +58,15 @@
                 <span asp-validation-for="Private" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="InventoryTotal" class="control-label"></label>
-                <input asp-for="InventoryTotal" class="form-control" />
-                <span asp-validation-for="InventoryTotal" class="text-danger"></span>
+                <label asp-for="InventoryAccuvax" class="control-label"></label>
+                <input asp-for="InventoryAccuvax" class="form-control" />
+                <span asp-validation-for="InventoryAccuvax" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="InventoryMax" class="control-label"></label>
-                <input asp-for="InventoryMax" class="form-control" />
-                <span asp-validation-for="InventoryMax" class="text-danger"></span>
+                <label asp-for="InventoryFridge" class="control-label"></label>
+                <input asp-for="InventoryFridge" class="form-control" />
+                <span asp-validation-for="InventoryFridge" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

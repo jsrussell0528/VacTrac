@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,6 +19,7 @@ namespace VacTrac.Controllers
             _logger = logger;
         }
 
+        //Razor view methods
         public IActionResult Index()
         {
 
@@ -41,6 +43,7 @@ namespace VacTrac.Controllers
         [HttpPost]
         public IActionResult CreateVaccine(Vaccines vaccine)
         {
+            vaccine.WeeklyPAR = vaccine.MonthlyPAR / 4;
             _myDbContext.Vaccines.Add(vaccine);
             _myDbContext.SaveChanges();
             return RedirectToAction("Vaccines");
@@ -63,17 +66,17 @@ namespace VacTrac.Controllers
                            select v).FirstOrDefault();
 
             vac.Description = vaccine.Description;
-            vac.InventoryTotal = vaccine.InventoryTotal;
-            vac.InventoryMax = vaccine.InventoryMax;
+            vac.InventoryAccuvax = vaccine.InventoryAccuvax;
+            vac.InventoryFridge = vaccine.InventoryFridge;
             vac.Private = vaccine.Private;
             vac.VaccineName = vaccine.VaccineName;
-            vac.WeeklyPAR = vaccine.WeeklyPAR;
+            vac.WeeklyPAR = vaccine.MonthlyPAR / 4;
+            vac.MonthlyPAR = vaccine.MonthlyPAR;
 
             _myDbContext.SaveChanges();
 
             return RedirectToAction("Vaccines");
         }
-
 
         public IActionResult VaccineDetails(int? id)
         {
@@ -84,7 +87,6 @@ namespace VacTrac.Controllers
             return View(vaccine);
         }
 
-
         public IActionResult DeleteVaccine(int? id)
         {
             var vaccine = (from v in _myDbContext.Vaccines
@@ -93,6 +95,7 @@ namespace VacTrac.Controllers
 
             return View(vaccine);
         }
+
         [HttpPost]
         public IActionResult DeleteVaccine(Vaccines vaccine)
         {
@@ -109,6 +112,46 @@ namespace VacTrac.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        //AJAX Functions
+
+        public string getVaccineInventoryDataTable(string vaccineType)
+        {
+            var vaccines = _myDbContext.Vaccines.Where(x => x.Private == vaccineType);
+            return JsonConvert.SerializeObject(vaccines);
+        }
+        
+        public string getVaccineMasterListDataTable()
+        {
+            return "";
+        }
+
+        public void saveVaccine(Vaccines vaccine)
+        {
+            var vac = (from v in _myDbContext.Vaccines
+                       where v.ID == vaccine.ID
+                       select v).FirstOrDefault();
+
+            vac.Description = vaccine.Description;
+            vac.InventoryAccuvax = vaccine.InventoryAccuvax;
+            vac.InventoryFridge = vaccine.InventoryFridge;
+            vac.Private = vaccine.Private;
+            vac.VaccineName = vaccine.VaccineName;
+            vac.WeeklyPAR = vaccine.MonthlyPAR / 4;
+            vac.MonthlyPAR = vaccine.MonthlyPAR;
+
+            _myDbContext.SaveChanges();
+        }
+
+        public void deleteVaccine(int ID)
+        {
+            var vac = (from v in _myDbContext.Vaccines
+                       where v.ID == ID
+                       select v).FirstOrDefault();
+
+            _myDbContext.Remove(vac);
+            _myDbContext.SaveChanges();
         }
     }
 }

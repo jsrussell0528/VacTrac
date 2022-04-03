@@ -6,6 +6,9 @@
 }
 <h1 class="display-6 text-center">Vaccines</h1>
 <div>
+    <p>
+        <a class="btn btn-primary" asp-action="AddWeekly">Create New</a>
+    </p>
     <div class="tab-content">
         <ul class="nav nav-tabs justify-content-center" id="myTab">
             <li class="nav-item col-11 row">
@@ -39,7 +42,23 @@
                     <tbody>
                         @foreach (var item in VFC)
                         {
-                            <tr>
+                            string style = "";
+                            //if the monthly par is more than total stock -> critical low, order vaccines NOW
+                            if (item.WeeklyPAR > item.InventoryAccuvax + item.InventoryFridge)
+                            {
+                                style = "table-danger";//red
+                            }
+                            //if the monthly par is more than current stock, flag for re-order soon
+                            else if (item.MonthlyPAR > item.InventoryAccuvax + item.InventoryFridge)
+                            {
+                                style = "table-warning";//yellow
+                            }
+                            //if the weekly par is more than is in the accuvax-> flag for restock
+                            else if (item.WeeklyPAR > item.InventoryAccuvax)
+                            {
+                                style = "table-info";//blue
+                            }
+                            <tr class="@style">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.VaccineName)
                                 </td>
@@ -53,7 +72,7 @@
                                     @Html.DisplayFor(modelItem => item.WeeklyPAR)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.InventoryTotal) / @Html.DisplayFor(modelItem => item.InventoryMax)
+                                    @Html.DisplayFor(modelItem => item.InventoryAccuvax) / @Html.DisplayFor(modelItem => item.InventoryFridge)
                                 </td>
                             </tr>
                         }
@@ -86,7 +105,23 @@
                     <tbody>
                         @foreach (var item in Private)
                         {
-                            <tr>
+                            string style = "";
+                            //if the monthly par is more than total stock -> critical low, order vaccines NOW
+                            if (item.WeeklyPAR > item.InventoryAccuvax + item.InventoryFridge)
+                            {
+                                style = "table-danger";//red
+                            }
+                            //if the monthly par is more than current stock, flag for re-order soon
+                            else if (item.MonthlyPAR > item.InventoryAccuvax + item.InventoryFridge)
+                            {
+                                style = "table-warning";//yellow
+                            }
+                            //if the weekly par is more than is in the accuvax-> flag for restock
+                            else if (item.WeeklyPAR > item.InventoryAccuvax)
+                            {
+                                style = "table-info";//blue
+                            }
+                            <tr class="@style">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.VaccineName)
                                 </td>
@@ -100,7 +135,7 @@
                                     @Html.DisplayFor(modelItem => item.WeeklyPAR)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.InventoryTotal) / @Html.DisplayFor(modelItem => item.InventoryMax)
+                                    @Html.DisplayFor(modelItem => item.InventoryAccuvax) / @Html.DisplayFor(modelItem => item.InventoryFridge)
                                 </td>
                             </tr>
                         }
@@ -133,7 +168,23 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
+                            string style = "";
+                            //if the monthly par is more than total stock -> critical low, order vaccines NOW
+                            if (item.WeeklyPAR > item.InventoryAccuvax + item.InventoryFridge)
+                            {
+                                style = "table-danger";//red
+                            }
+                            //if the monthly par is more than current stock, flag for re-order soon
+                            else if (item.MonthlyPAR > item.InventoryAccuvax + item.InventoryFridge)
+                            {
+                                style = "table-warning";//yellow
+                            }
+                            //if the weekly par is more than is in the accuvax-> flag for restock
+                            else if (item.WeeklyPAR > item.InventoryAccuvax)
+                            {
+                                style = "table-info";//blue
+                            }
+                            <tr class="@style">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.VaccineName)
                                 </td>
@@ -147,7 +198,7 @@
                                     @Html.DisplayFor(modelItem => item.WeeklyPAR)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.InventoryTotal) / @Html.DisplayFor(modelItem => item.InventoryMax)
+                                    @Html.DisplayFor(modelItem => item.InventoryAccuvax) / @Html.DisplayFor(modelItem => item.InventoryFridge)
                                 </td>
                             </tr>
                         }
