@@ -72,8 +72,33 @@ namespace VacTrac.Controllers
             wkc.FridgeCount = w.FridgeCount;
             _myDbContext.SaveChanges();
 
-            return RedirectToAction("Vaccines");
+            return RedirectToAction("WeeklyCounts");
         }
+
+        public IActionResult DeleteWeeklyCount(int? id)
+        {
+
+            ViewData["Vaccines"] = GetVaccineKeys();
+            var weeklyCount = (from v in _myDbContext.WeeklyCounts
+                           where v.ID == id
+                           select v).FirstOrDefault();
+
+            return View(weeklyCount);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteWeeklyCount(WeeklyCounts weeklyCount)
+        {
+            var wk = (from v in _myDbContext.WeeklyCounts
+                       where v.ID == weeklyCount.ID
+                       select v).FirstOrDefault();
+
+            _myDbContext.Remove(wk);
+            _myDbContext.SaveChanges();
+
+            return RedirectToAction("WeeklyCounts");
+        }
+
         public IActionResult Vaccines()
         {
             var AllVaccines = _myDbContext.Vaccines;

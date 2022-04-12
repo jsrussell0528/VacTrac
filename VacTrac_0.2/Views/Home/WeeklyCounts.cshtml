@@ -53,9 +53,8 @@
                     @Html.DisplayFor(modelItem => item.Dispensed)
                 </td>
                 <td>
-                    <a asp-action="EditWeeklyCount" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="DetailsWeeklyCount" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="DeleteWeeklyCount" asp-route-id="@item.ID">Delete</a>
+                    <a class="btn btn-success" asp-action="EditWeeklyCount" asp-route-id="@item.ID">Edit</a>
+                    <a class="btn btn-danger" asp-action="DeleteWeeklyCount" asp-route-id="@item.ID">Delete</a>
                 </td>
             </tr>
             }

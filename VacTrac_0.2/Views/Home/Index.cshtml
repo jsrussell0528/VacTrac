@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<VacTrac.Models.Vaccines>
 @{
-    ViewData["Title"] = "PARs Tracking";
+    ViewData["Title"] = "PAR and Inventory Tracking";
     IEnumerable<VaccinesFormatted> VFC = (IEnumerable<VaccinesFormatted>)ViewData["VFC"];
     IEnumerable<VaccinesFormatted> Private = (IEnumerable<VaccinesFormatted>)ViewData["Private"];
     IEnumerable<VaccinesFormatted> All = (IEnumerable<VaccinesFormatted>)ViewData["All"];
 }
-<h1 class="display-6 text-center">Vaccines</h1>
+<h1 class="display-6 text-center">Inventory</h1>
 <div>
     <div class="tab-content">
         <ul class="nav nav-tabs justify-content-center" id="myTab">

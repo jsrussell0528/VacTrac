@@ -1,14 +1,13 @@
 ﻿@model VacTrac.Models.WeeklyCounts
 
 @{
-    ViewData["Title"] = "CreateWeeklyCount";
+    ViewData["Title"] = "Add Weekly Count";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Dictionary<int, string> Vaccines = (Dictionary<int, string>)ViewData["Vaccines"];
 }
 
-<h1>CreateWeeklyCount</h1>
+<h1>Add Weekly Count</h1>
 
-<h4>WeeklyCounts</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -32,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
+                <input  asp-for="Date" class="form-control" />
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
