@@ -13,7 +13,8 @@ namespace VacTrac
     public class DBCtx: DbContext
     {
         public DbSet<Vaccines> Vaccines { get; set; }
-        public DbSet<Vaccines> InventoryCount { get; set; }
+        public DbSet<WeeklyCounts> WeeklyCounts { get; set; }
+        //public DbSet<Vaccines> InventoryCount { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = "Database\\VacTracDB.db" };

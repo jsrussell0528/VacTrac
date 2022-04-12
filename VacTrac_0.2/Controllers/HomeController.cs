@@ -24,12 +24,56 @@ namespace VacTrac.Controllers
         {
 
             var AllVaccines = _myDbContext.Vaccines;
-            ViewData["VFC"] = _myDbContext.Vaccines.Where(x => x.Private == "VFC");
-            ViewData["Private"] = _myDbContext.Vaccines.Where(x => x.Private == "Private");
+            ViewData["All"] = GetFormattedVaccines(_myDbContext.Vaccines);
+            ViewData["VFC"] = GetFormattedVaccines(_myDbContext.Vaccines.Where(x => x.Private == "VFC"));
+            ViewData["Private"] = GetFormattedVaccines(_myDbContext.Vaccines.Where(x => x.Private == "Private"));
+            //ViewData["Inventory"] = _myDbContext.WeeklyCounts.GroupBy(t => t.VaccinesID).Select(grp => grp.OrderByDescending(t => t.Date).FirstOrDefault());
 
             return View(AllVaccines);
         }
+        public IActionResult WeeklyCounts()
+        {
+            ViewData["Vaccines"] = GetVaccineKeys();
+            var weeklyCounts = _myDbContext.WeeklyCounts;
+            return View(weeklyCounts);
+        }
+        public IActionResult CreateWeeklyCount()
+        {
+            ViewData["Vaccines"] = GetVaccineKeys();
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateWeeklyCount(WeeklyCounts weeklyCount)
+        {
+            _myDbContext.WeeklyCounts.Add(weeklyCount);
+            _myDbContext.SaveChanges();
+            return RedirectToAction("WeeklyCounts");
+        }
 
+        public IActionResult EditWeeklyCount(int? id)
+        {
+            ViewData["Vaccines"] = GetVaccineKeys();
+            var weeklyCount = (from v in _myDbContext.WeeklyCounts
+                           where v.ID == id
+                           select v).FirstOrDefault();
+
+            return View(weeklyCount);
+        }
+        [HttpPost]
+        public IActionResult EditWeeklyCount(WeeklyCounts w)
+        {
+            var wkc = (from v in _myDbContext.WeeklyCounts
+                       where v.ID == w.ID
+                       select v).FirstOrDefault();
+
+            wkc.Date = w.Date;
+            wkc.AccuVaxCount = w.AccuVaxCount;
+            wkc.Dispensed = w.Dispensed;
+            wkc.FridgeCount = w.FridgeCount;
+            _myDbContext.SaveChanges();
+
+            return RedirectToAction("Vaccines");
+        }
         public IActionResult Vaccines()
         {
             var AllVaccines = _myDbContext.Vaccines;
@@ -49,7 +93,6 @@ namespace VacTrac.Controllers
             return RedirectToAction("Vaccines");
         }
 
-
         public IActionResult EditVaccine(int? id)
         {
             var vaccine = (from v in _myDbContext.Vaccines
@@ -66,8 +109,8 @@ namespace VacTrac.Controllers
                            select v).FirstOrDefault();
 
             vac.Description = vaccine.Description;
-            vac.InventoryAccuvax = vaccine.InventoryAccuvax;
-            vac.InventoryFridge = vaccine.InventoryFridge;
+            //vac.InventoryAccuvax = vaccine.InventoryAccuvax;
+            //vac.InventoryFridge = vaccine.InventoryFridge;
             vac.Private = vaccine.Private;
             vac.VaccineName = vaccine.VaccineName;
             vac.WeeklyPAR = vaccine.MonthlyPAR / 4;
@@ -114,14 +157,59 @@ namespace VacTrac.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        //AJAX Functions
-
-        public string getVaccineInventoryDataTable(string vaccineType)
+        public IQueryable<Vaccines> GetPrivateVaccines()
         {
-            var vaccines = _myDbContext.Vaccines.Where(x => x.Private == vaccineType);
-            return JsonConvert.SerializeObject(vaccines);
+            return _myDbContext.Vaccines.Where(x => x.Private == "Private");
+            
         }
-        
+        public IQueryable<Vaccines> GetVFCVaccines()
+        {
+           return _myDbContext.Vaccines.Where(x => x.Private == "VFC");
+        }
+        public IQueryable<Vaccines> GetAllVaccines()
+        {
+            return _myDbContext.Vaccines;
+        }
+        public Dictionary<int, string> GetVaccineKeys()
+        {
+            Dictionary<int, string> keys = new Dictionary<int, string>();
+
+            foreach(var v in GetAllVaccines())
+            {
+                keys.Add(v.ID, v.VaccineName + " - " + v.Private);
+            }
+
+            return keys;
+        }
+
+        public IQueryable<VaccinesFormatted> GetFormattedVaccines(IQueryable<Vaccines> vaccines)
+        {
+            List<VaccinesFormatted> vaccinesFormatteds = new List<VaccinesFormatted>();
+            foreach(var v in vaccines)
+            {
+                var mostRecentWeeklyTotal = _myDbContext.WeeklyCounts.Where(x => x.VaccinesID == v.ID).OrderByDescending(x => x.Date).FirstOrDefault();
+                VaccinesFormatted vf = new VaccinesFormatted();
+                vf.VaccineName = v.VaccineName;
+                vf.Description = v.Description;
+                if (mostRecentWeeklyTotal != null)
+                {
+                    vf.InventoryAccuvax = mostRecentWeeklyTotal.AccuVaxCount;
+                    vf.InventoryFridge = mostRecentWeeklyTotal.FridgeCount;
+                }
+                else
+                {
+                    vf.InventoryAccuvax = 0;
+                    vf.InventoryFridge = 0;
+                }
+                vf.MonthlyPAR = v.MonthlyPAR;
+                vf.WeeklyPAR = v.WeeklyPAR;
+
+                vaccinesFormatteds.Add(vf);
+            }
+
+            return vaccinesFormatteds.AsQueryable();
+        }
+
         public string getVaccineMasterListDataTable()
         {
             return "";
@@ -134,8 +222,8 @@ namespace VacTrac.Controllers
                        select v).FirstOrDefault();
 
             vac.Description = vaccine.Description;
-            vac.InventoryAccuvax = vaccine.InventoryAccuvax;
-            vac.InventoryFridge = vaccine.InventoryFridge;
+            //vac.InventoryAccuvax = vaccine.InventoryAccuvax;
+            //vac.InventoryFridge = vaccine.InventoryFridge;
             vac.Private = vaccine.Private;
             vac.VaccineName = vaccine.VaccineName;
             vac.WeeklyPAR = vaccine.MonthlyPAR / 4;

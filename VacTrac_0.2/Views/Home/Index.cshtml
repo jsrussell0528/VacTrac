@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<VacTrac.Models.Vaccines>
 @{
     ViewData["Title"] = "PARs Tracking";
-    IEnumerable<VacTrac.Models.Vaccines> VFC = (IEnumerable<VacTrac.Models.Vaccines>)ViewData["VFC"];
-    IEnumerable<VacTrac.Models.Vaccines> Private = (IEnumerable<VacTrac.Models.Vaccines>)ViewData["Private"];
+    IEnumerable<VaccinesFormatted> VFC = (IEnumerable<VaccinesFormatted>)ViewData["VFC"];
+    IEnumerable<VaccinesFormatted> Private = (IEnumerable<VaccinesFormatted>)ViewData["Private"];
+    IEnumerable<VaccinesFormatted> All = (IEnumerable<VaccinesFormatted>)ViewData["All"];
 }
 <h1 class="display-6 text-center">Vaccines</h1>
 <div>
-    <p>
-        <a class="btn btn-primary" asp-action="AddWeekly">Create New</a>
-    </p>
     <div class="tab-content">
         <ul class="nav nav-tabs justify-content-center" id="myTab">
             <li class="nav-item col-11 row">
@@ -35,7 +33,7 @@
                                 Weekly PAR
                             </th>
                             <th>
-                                Inventory
+                                Inventory (Accuvax/Fridge)
                             </th>
                         </tr>
                     </thead>
@@ -166,7 +164,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in All)
                         {
                             string style = "";
                             //if the monthly par is more than total stock -> critical low, order vaccines NOW
