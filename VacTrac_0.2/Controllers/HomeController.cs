@@ -24,7 +24,6 @@ namespace VacTrac.Controllers
         {
 
             var AllVaccines = _myDbContext.Vaccines;
-            ViewData["All"] = GetFormattedVaccines(_myDbContext.Vaccines);
             ViewData["VFC"] = GetFormattedVaccines(_myDbContext.Vaccines.Where(x => x.Private == "VFC"));
             ViewData["Private"] = GetFormattedVaccines(_myDbContext.Vaccines.Where(x => x.Private == "Private"));
             //ViewData["Inventory"] = _myDbContext.WeeklyCounts.GroupBy(t => t.VaccinesID).Select(grp => grp.OrderByDescending(t => t.Date).FirstOrDefault());
@@ -68,7 +67,7 @@ namespace VacTrac.Controllers
 
             wkc.Date = w.Date;
             wkc.AccuVaxCount = w.AccuVaxCount;
-            wkc.Dispensed = w.Dispensed;
+            //wkc.Dispensed = w.Dispensed;
             wkc.FridgeCount = w.FridgeCount;
             _myDbContext.SaveChanges();
 

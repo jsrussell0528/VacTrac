@@ -27,10 +27,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.FridgeCount)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Dispensed)
-            </th>
-            <th></th>
+            </th>*@
+            <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -49,9 +49,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FridgeCount)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Dispensed)
-                </td>
+                @*<td>
+                    @Htm*@<!--l.DisplayFor(modelItem => item.Dispensed)-->
+                @*</td>*@
                 <td>
                     <a class="btn btn-success" asp-action="EditWeeklyCount" asp-route-id="@item.ID">Edit</a>
                     <a class="btn btn-danger" asp-action="DeleteWeeklyCount" asp-route-id="@item.ID">Delete</a>
